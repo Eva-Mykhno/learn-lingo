@@ -1,0 +1,60 @@
+.list {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  padding: 12px;
+  border: 3px solid var(--light);
+}
+
+.headerItem {
+}
+
+.iconWithText {
+}
+
+.book {
+  fill: transparent;
+  stroke: black;
+}
+
+.spanText {
+}
+
+.star {
+  fill: var(--dark);
+}
+
+.heart {
+  fill: transparent;
+  stroke: black;
+}
+
+.title {
+}
+
+.info {
+}
+
+.text {
+}
+
+.button {
+}
+
+.levelList {
+}
+
+.levelItem {
+}
