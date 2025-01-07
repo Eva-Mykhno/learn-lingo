@@ -1,9 +1,9 @@
 @import "modern-normalize";
 
 :root {
-  font-family: Inter, system-ui, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,6 +15,7 @@
   --main: #121417;
   --accent: #8a8a89;
   --price: #38cd3e;
+  --background: #f8f8f8;
 }
 
 h1,
@@ -44,6 +45,7 @@ a {
 
 .container {
   margin: 0 auto;
-  width: 100%;
-  padding: 0 64px;
+  background-color: var(--background);
+  width: 1440px;
+  padding: 96px 128px;
 }

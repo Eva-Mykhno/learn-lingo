@@ -1,13 +1,18 @@
 .list {
-  width: 100vw;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
 .item {
+  width: 1184px;
+  padding: 24px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 48px;
+  background-color: white;
+  border-radius: 24px;
 }
 
 .img {
@@ -18,10 +23,44 @@
   border: 3px solid var(--light);
 }
 
+.wrapper {
+  /* display: flex;
+  justify-content: space-between; */
+}
+
+.subtitle {
+  margin-right: 192px;
+  color: var(--accent);
+  line-height: 1.5;
+}
+.wrap {
+  display: flex;
+  gap: 32px;
+}
+
 .headerItem {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .iconWithText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.iconWithText:not(:last-child)::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 16px;
+  background-color: var(--accent);
 }
 
 .book {
@@ -30,6 +69,11 @@
 }
 
 .spanText {
+  line-height: 1.5;
+}
+
+.price {
+  color: var(--price);
 }
 
 .star {
@@ -37,24 +81,92 @@
 }
 
 .heart {
+  margin-left: 64px;
   fill: transparent;
   stroke: black;
 }
 
 .title {
+  margin-top: 8px;
+  color: var(--main);
+  font-size: 24px;
+}
+
+.wrapText {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .info {
+  color: var(--accent);
+  line-height: 1.5;
 }
 
+.textLang {
+  color: var(--main);
+  text-decoration: underline;
+}
 .text {
+  color: var(--main);
 }
 
-.button {
+.read {
+  margin-top: 16px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--main);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .levelList {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
 }
 
 .levelItem {
+  padding: 8px 12px;
+  border-radius: 35px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--main);
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.selected {
+  background-color: var(--dark);
+}
+
+.unselected {
+  border: 1px solid var(--accent);
+}
+
+.radioHidden {
+  display: none;
+}
+
+.button {
+  display: block;
+  margin: 64px auto 0;
+  width: 184px;
+  height: 60px;
+  padding: 16px 48px;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--dark);
+  color: var(--main);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.55;
 }
