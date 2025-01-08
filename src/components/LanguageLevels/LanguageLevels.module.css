@@ -1,0 +1,32 @@
+.levelList {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.levelItem {
+  padding: 8px 12px;
+  border-radius: 35px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: var(--main);
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.selected {
+  background-color: var(--dark);
+}
+
+.unselected {
+  border: 1px solid var(--accent);
+}
+
+.radioLabel {
+  cursor: pointer;
+}
+
+.radioHidden {
+  display: none;
+}

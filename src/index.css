@@ -16,6 +16,7 @@
   --accent: #8a8a89;
   --price: #38cd3e;
   --background: #f8f8f8;
+  --white: #ffffff;
 }
 
 h1,
@@ -43,9 +44,13 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 .container {
   margin: 0 auto;
   background-color: var(--background);
   width: 1440px;
-  padding: 96px 128px;
+  padding: 0 128px;
 }

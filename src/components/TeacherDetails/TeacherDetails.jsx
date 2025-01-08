@@ -1,11 +1,13 @@
+import LanguageLevels from "../LanguageLevels/LanguageLevels";
 import s from "./TeacherDetails.module.css";
 
 const sprite = "../../../public/sprite.svg";
 
-const TeacherDetails = ({ teacher }) => {
+const TeacherDetails = ({ teacher, selectedLevel, onLevelChange }) => {
   const getReviewerName = (reviewer_name) => {
     return reviewer_name.charAt(0).toUpperCase();
   };
+
   return (
     <section className={s.details}>
       <p className={s.text}>{teacher.experience}</p>
@@ -31,6 +33,16 @@ const TeacherDetails = ({ teacher }) => {
           );
         })}
       </ul>
+      <LanguageLevels
+        teacherId={teacher.id}
+        levels={teacher.levels}
+        selectedLevel={selectedLevel}
+        onLevelChange={onLevelChange}
+      />
+
+      <button type="button" className={s.button}>
+        Book trial lesson
+      </button>
     </section>
   );
 };

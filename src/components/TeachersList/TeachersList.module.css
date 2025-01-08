@@ -1,11 +1,12 @@
 .list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
 .item {
-  width: 1184px;
+  width: 100%;
   padding: 24px;
   display: flex;
   flex-direction: row;
@@ -24,8 +25,7 @@
 }
 
 .wrapper {
-  /* display: flex;
-  justify-content: space-between; */
+  width: 100%;
 }
 
 .subtitle {
@@ -34,6 +34,7 @@
   line-height: 1.5;
 }
 .wrap {
+  width: 100%;
   display: flex;
   gap: 32px;
 }
@@ -114,6 +115,8 @@
 
 .read {
   margin-top: 16px;
+  margin-bottom: 32px;
+  padding: 0;
   outline: none;
   border: none;
   background-color: transparent;
@@ -123,36 +126,6 @@
   font-family: Roboto;
   font-size: 16px;
   font-weight: 500;
-}
-
-.levelList {
-  margin-top: 16px;
-  display: flex;
-  gap: 8px;
-}
-
-.levelItem {
-  padding: 8px 12px;
-  border-radius: 35px;
-  outline: none;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: var(--main);
-  font-size: 14px;
-  line-height: 1.14;
-}
-
-.selected {
-  background-color: var(--dark);
-}
-
-.unselected {
-  border: 1px solid var(--accent);
-}
-
-.radioHidden {
-  display: none;
 }
 
 .button {

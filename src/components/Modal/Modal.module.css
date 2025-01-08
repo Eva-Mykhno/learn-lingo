@@ -1,0 +1,13 @@
+.button {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.icon {
+  stroke: var(--main);
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import clsx from "clsx";
+// import clsx from "clsx";
 import { fetchTeachers } from "../../redux/teachers/operations";
 import {
   selectTeachers,
@@ -10,6 +10,7 @@ import {
 import Loader from "../Loader/Loader";
 import s from "./TeachersList.module.css";
 import TeacherDetails from "../TeacherDetails/TeacherDetails";
+import LanguageLevels from "../LanguageLevels/LanguageLevels";
 
 const sprite = "../../../public/sprite.svg";
 
@@ -17,8 +18,6 @@ const TeachersList = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(4);
   const [expandedTeacherId, setExpandedTeacherId] = useState(null);
-
-  // Состояние для выбранных уровней каждого учителя
   const [selectedLevels, setSelectedLevels] = useState({});
 
   const teachers = useSelector(selectTeachers);
@@ -29,7 +28,6 @@ const TeachersList = () => {
     dispatch(fetchTeachers());
   }, [dispatch]);
 
-  // Обработчик изменения уровня
   const handleLevelChange = (teacherId, level) => {
     setSelectedLevels((prev) => ({
       ...prev,
@@ -38,7 +36,7 @@ const TeachersList = () => {
   };
 
   const handleToggleDetails = (id) => {
-    setExpandedTeacherId(id);
+    setExpandedTeacherId((prev) => (prev === id ? null : id));
   };
 
   const handleLoadMore = () => {
@@ -59,7 +57,6 @@ const TeachersList = () => {
     <section>
       <ul className={s.list}>
         {teachers.slice(0, visible).map((teacher) => {
-          // Устанавливаем первый уровень как выбранный по умолчанию, если он еще не был установлен
           const selectedLevel = selectedLevels[teacher.id] || teacher.levels[0];
 
           return (
@@ -71,7 +68,7 @@ const TeachersList = () => {
               />
               <div className={s.wrapper}>
                 <div className={s.headerItem}>
-                  <p className={s.subtitle}>Teacher</p>
+                  <p className={s.subtitle}>Languages</p>
                   <div className={s.wrap}>
                     <div className={s.iconWithText}>
                       <svg className={s.book} height="16" width="16">
@@ -103,17 +100,17 @@ const TeachersList = () => {
                 </h3>
                 <div className={s.wrapText}>
                   <p className={s.info}>
-                    Speaks:
+                    Speaks:{" "}
                     <span className={s.textLang}>
                       {teacher.languages.join(", ")}
                     </span>
                   </p>
                   <p className={s.info}>
-                    Lesson Info:
+                    Lesson Info:{" "}
                     <span className={s.text}>{teacher.lesson_info}</span>
                   </p>
                   <p className={s.info}>
-                    Conditions:
+                    Conditions:{" "}
                     <span className={s.text}>{teacher.conditions}</span>
                   </p>
                 </div>
@@ -128,30 +125,21 @@ const TeachersList = () => {
                 )}
 
                 {expandedTeacherId === teacher.id && (
-                  <TeacherDetails teacher={teacher} />
+                  <TeacherDetails
+                    teacher={teacher}
+                    selectedLevel={selectedLevel}
+                    onLevelChange={handleLevelChange}
+                  />
                 )}
-                {/* Радио-кнопки для уровней */}
-                <ul className={s.levelList}>
-                  {teacher.levels.map((level, index) => (
-                    <li
-                      key={index}
-                      className={clsx(
-                        s.levelItem,
-                        selectedLevel === level ? s.selected : s.unselected
-                      )}
-                      onClick={() => handleLevelChange(teacher.id, level)}>
-                      <input
-                        type="radio"
-                        name={`level-${teacher.id}`}
-                        value={level}
-                        checked={selectedLevel === level}
-                        onChange={() => handleLevelChange(teacher.id, level)}
-                        className={s.radioHidden}
-                      />
-                      <label className={s.radioLabel}>{level}</label>
-                    </li>
-                  ))}
-                </ul>
+
+                {expandedTeacherId !== teacher.id && (
+                  <LanguageLevels
+                    teacherId={teacher.id}
+                    levels={teacher.levels}
+                    selectedLevel={selectedLevel}
+                    onLevelChange={handleLevelChange}
+                  />
+                )}
               </div>
             </li>
           );

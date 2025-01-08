@@ -1,0 +1,132 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wrap {
+  display: flex;
+  gap: 24px;
+}
+
+.info {
+  padding: 98px 64px;
+  border-radius: 30px;
+  background-color: var(--background);
+}
+
+.title {
+  color: var(--main);
+  font-size: 48px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+}
+
+.spanTitle {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text {
+  width: 470px;
+  margin-top: 32px;
+  color: var(--main);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+}
+
+.link {
+  margin-top: 64px;
+  display: block;
+  width: 267px;
+  height: 60px;
+  padding: 16px 88px;
+  border-radius: 12px;
+  background-color: var(--dark);
+  color: var(--main);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.img {
+  width: 568px;
+  height: 530px;
+  border-radius: 30px;
+}
+
+.wrapNumbers {
+  width: 100%;
+  padding: 40px 122px;
+  position: relative;
+  display: flex;
+  gap: 100px;
+}
+
+.wrapNumbers::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  padding: 0;
+  border: 2px solid transparent;
+  background: repeating-linear-gradient(
+        to right,
+        var(--dark) 0,
+        var(--dark) 8px,
+        transparent 8px,
+        transparent 16px
+      )
+      top,
+    repeating-linear-gradient(
+        to bottom,
+        var(--dark) 0,
+        var(--dark) 8px,
+        transparent 8px,
+        transparent 16px
+      )
+      left,
+    repeating-linear-gradient(
+        to right,
+        var(--dark) 0,
+        var(--dark) 8px,
+        transparent 8px,
+        transparent 16px
+      )
+      bottom,
+    repeating-linear-gradient(
+        to bottom,
+        var(--dark) 0,
+        var(--dark) 8px,
+        transparent 8px,
+        transparent 16px
+      )
+      right;
+  background-repeat: no-repeat;
+  background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+  background-position: top left, top left, bottom right, bottom right;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wrapSpan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.numbers {
+  color: var(--main);
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.span {
+  color: var(--accent);
+}

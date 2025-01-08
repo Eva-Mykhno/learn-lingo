@@ -1,7 +1,13 @@
-import React from "react";
+import Home from "../../components/Home/Home";
+import clsx from "clsx";
+import s from "./HomePage.module.css";
 
-const Home = () => {
-  return <div>Home</div>;
+const HomePage = () => {
+  return (
+    <main className={clsx(s.wrapper, "container")}>
+      <Home />
+    </main>
+  );
 };
 
-export default Home;
+export default HomePage;
