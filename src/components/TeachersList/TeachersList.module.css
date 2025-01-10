@@ -70,7 +70,7 @@
   width: 16px;
   height: 16px;
   fill: transparent;
-  stroke: black;
+  stroke: var(--main);
 }
 
 .spanText {

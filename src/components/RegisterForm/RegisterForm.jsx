@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./RegisterForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -44,7 +44,6 @@ const RegisterForm = ({ closeModal }) => {
     try {
       await dispatch(registerUser(values));
 
-      // Если регистрация прошла успешно
       iziToast.show({
         title: "Success!",
         message: "You have successfully registered!",
@@ -56,14 +55,6 @@ const RegisterForm = ({ closeModal }) => {
       closeModal();
     } catch (error) {
       console.error("Registration failed:", error);
-
-      // Обрабатываем ошибки
-      iziToast.error({
-        title: "Error!",
-        message: "An error occurred during registration. Please try again.",
-        position: "center",
-        timeout: 6000,
-      });
     } finally {
       setIsLoading(false);
     }
@@ -85,28 +76,42 @@ const RegisterForm = ({ closeModal }) => {
         initialValues={initialRegisterValues}
         onSubmit={handleSubmit}>
         <Form className={s.form}>
-          <Field
-            type="text"
-            name="name"
-            placeholder="Name"
-            className={s.input}
-            disabled={isLoading}
-          />
-          <Field
-            type="email"
-            name="email"
-            placeholder="Email"
-            className={s.input}
-            disabled={isLoading}
-          />
+          <div>
+            <Field
+              type="text"
+              name="name"
+              placeholder="Name"
+              className={s.input}
+              disabled={isLoading}
+            />
+            <ErrorMessage name="name" component="span" className={s.error} />
+          </div>
+
+          <div>
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+              className={s.input}
+              disabled={isLoading}
+            />
+            <ErrorMessage name="email" component="span" className={s.error} />
+          </div>
+
           <div className={s.wrap}>
             <Field
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
               className={s.input}
               disabled={isLoading}
             />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={s.error}
+            />
+
             <button
               type="button"
               onClick={togglePasswordVisibility}

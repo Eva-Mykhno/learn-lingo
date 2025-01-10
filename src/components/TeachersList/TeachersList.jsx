@@ -71,11 +71,7 @@ const TeachersList = () => {
                   <p className={s.subtitle}>Languages</p>
                   <div className={s.wrap}>
                     <div className={s.iconWithText}>
-                      <svg
-                        className={s.book}
-                        width="16"
-                        height="16"
-                        preserveAspectRatio="none">
+                      <svg className={s.book} width="16" height="16">
                         <use href={`${sprite}#icon-book-open`} />
                       </svg>
                       <span className={s.spanText}>Lessons online</span>

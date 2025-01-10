@@ -15,7 +15,9 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
 
-  const user = useSelector(selectUser); // Получаем пользователя из состояния
+  const user = useSelector(selectUser); // Получаем информацию о пользователе из Redux
+  // console.log("Current user in Header:", user);
+
   const dispatch = useDispatch();
 
   const openModal = (type) => {
@@ -55,27 +57,7 @@ const Header = () => {
           Favorites
         </NavLink>
       </nav>
-      {/* <div className={s.wrapLogin}>
-        <button
-          type="button"
-          className={s.login}
-          onClick={() => openModal("login")}>
-          <svg className={s.icon} height="20" width="20">
-            <use href={`${sprite}#icon-log-in`} />
-          </svg>
-          <span className={s.text}>Log in</span>
-        </button>
-        <button
-          type="button"
-          className={s.register}
-          onClick={() => openModal("register")}>
-          Registration
-        </button>
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {modalType === "login" && <LoginForm closeModal={closeModal} />}
-          {modalType === "register" && <RegisterForm closeModal={closeModal} />}
-        </Modal>
-      </div> */}
+
       <div className={s.wrapLogin}>
         {!user ? (
           <>
@@ -96,9 +78,14 @@ const Header = () => {
             </button>
           </>
         ) : (
-          <button type="button" className={s.logout} onClick={handleLogout}>
-            <span className={s.text}>Logout</span>
-          </button>
+          <div className={s.wrapLogin}>
+            <button type="button" className={s.login} onClick={handleLogout}>
+              <svg className={s.icon} height="20" width="20">
+                <use href={`${sprite}#icon-log-out`} />
+              </svg>
+              <span className={s.text}>Logout</span>
+            </button>
+          </div>
         )}
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {modalType === "login" && <LoginForm closeModal={closeModal} />}

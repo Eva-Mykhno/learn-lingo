@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./LoginForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -70,21 +70,30 @@ const LoginForm = ({ closeModal }) => {
         initialValues={initialLoginValues}
         onSubmit={handleSubmit}>
         <Form className={s.form}>
-          <Field
-            type="email"
-            name="email"
-            placeholder="Email"
-            className={s.input}
-            disabled={isLoading}
-          />
+          <div>
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+              className={s.input}
+              disabled={isLoading}
+            />
+            <ErrorMessage name="email" component="span" className={s.error} />
+          </div>
           <div className={s.wrap}>
             <Field
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
               className={s.input}
               disabled={isLoading}
             />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={s.error}
+            />
+
             <button
               type="button"
               onClick={togglePasswordVisibility}
@@ -96,7 +105,6 @@ const LoginForm = ({ closeModal }) => {
               </svg>
             </button>
           </div>
-
           <button type="submit" className={s.button} disabled={isLoading}>
             Log in
           </button>
