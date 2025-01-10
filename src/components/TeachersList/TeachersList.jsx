@@ -71,7 +71,11 @@ const TeachersList = () => {
                   <p className={s.subtitle}>Languages</p>
                   <div className={s.wrap}>
                     <div className={s.iconWithText}>
-                      <svg className={s.book} height="16" width="16">
+                      <svg
+                        className={s.book}
+                        width="16"
+                        height="16"
+                        preserveAspectRatio="none">
                         <use href={`${sprite}#icon-book-open`} />
                       </svg>
                       <span className={s.spanText}>Lessons online</span>
@@ -88,7 +92,7 @@ const TeachersList = () => {
                     </div>
                     <div className={s.iconWithText}>
                       <span className={s.spanText}>Price / 1 hour:</span>
-                      <span className={s.price}>{teacher.price_per_hour}</span>
+                      <span className={s.price}>{teacher.price_per_hour}$</span>
                     </div>
                   </div>
                   <svg className={s.heart} height="26" width="26">

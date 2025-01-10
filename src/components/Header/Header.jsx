@@ -1,12 +1,39 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import clsx from "clsx";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/auth/operations";
+import { selectUser } from "../../redux/auth/selectors";
+import Modal from "../Modal/Modal";
+import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
 import s from "./Header.module.css";
 
 const sprite = "../../../public/sprite.svg";
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
+
+  const user = useSelector(selectUser); // Получаем пользователя из состояния
+  const dispatch = useDispatch();
+
+  const openModal = (type) => {
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalType(null);
+  };
+
   const buildLinkClassName = ({ isActive }) => {
     return clsx(s.link, isActive && s.active);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser()); // Вызов операции логаута
   };
 
   return (
@@ -28,14 +55,55 @@ const Header = () => {
           Favorites
         </NavLink>
       </nav>
-      <div className={s.wrapLogin}>
-        <button className={s.login}>
+      {/* <div className={s.wrapLogin}>
+        <button
+          type="button"
+          className={s.login}
+          onClick={() => openModal("login")}>
           <svg className={s.icon} height="20" width="20">
             <use href={`${sprite}#icon-log-in`} />
           </svg>
           <span className={s.text}>Log in</span>
         </button>
-        <button className={s.register}>Registration</button>
+        <button
+          type="button"
+          className={s.register}
+          onClick={() => openModal("register")}>
+          Registration
+        </button>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {modalType === "login" && <LoginForm closeModal={closeModal} />}
+          {modalType === "register" && <RegisterForm closeModal={closeModal} />}
+        </Modal>
+      </div> */}
+      <div className={s.wrapLogin}>
+        {!user ? (
+          <>
+            <button
+              type="button"
+              className={s.login}
+              onClick={() => openModal("login")}>
+              <svg className={s.icon} height="20" width="20">
+                <use href={`${sprite}#icon-log-in`} />
+              </svg>
+              <span className={s.text}>Log in</span>
+            </button>
+            <button
+              type="button"
+              className={s.register}
+              onClick={() => openModal("register")}>
+              Registration
+            </button>
+          </>
+        ) : (
+          <button type="button" className={s.logout} onClick={handleLogout}>
+            <span className={s.text}>Logout</span>
+          </button>
+        )}
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {modalType === "login" && <LoginForm closeModal={closeModal} />}
+          {modalType === "register" && <RegisterForm closeModal={closeModal} />}
+        </Modal>
       </div>
     </header>
   );

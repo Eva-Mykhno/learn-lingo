@@ -17,6 +17,7 @@
   --price: #38cd3e;
   --background: #f8f8f8;
   --white: #ffffff;
+  --border: rgba(18, 20, 23, 0.2);
 }
 
 h1,
@@ -46,6 +47,12 @@ a {
 
 button {
   cursor: pointer;
+}
+
+svg,
+svg * {
+  all: unset;
+  box-sizing: border-box;
 }
 
 .container {

@@ -1,7 +1,109 @@
-import React from "react";
+import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
+import s from "./LoginForm.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/auth/operations"; // импортируем операцию для логина
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
-const LoginForm = () => {
-  return <div>LoginForm</div>;
+const sprite = "../../../public/sprite.svg";
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email format")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Email must have a one "@" and a "."'
+    )
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 8 characters")
+    .max(16, "Password must be at most 16 characters")
+    .matches(/^[^\s]*$/, "Password should not contain spaces")
+    .required("Password is required"),
+});
+
+const LoginForm = ({ closeModal }) => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const initialLoginValues = {
+    email: "",
+    password: "",
+  };
+
+  const handleSubmit = async (values, actions) => {
+    setIsLoading(true);
+    try {
+      await dispatch(loginUser(values));
+      iziToast.show({
+        title: "Success!",
+        message: "You have successfully logged in!",
+        position: "center",
+        color: "green",
+        timeout: 6000,
+      });
+      actions.resetForm();
+      closeModal();
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  return (
+    <div className={s.wrapper}>
+      <h2 className={s.title}>Log In</h2>
+      <p className={s.text}>
+        Welcome back! Please enter your credentials to access your account and
+        continue your search for an teacher.
+      </p>
+      <Formik
+        validationSchema={loginSchema}
+        initialValues={initialLoginValues}
+        onSubmit={handleSubmit}>
+        <Form className={s.form}>
+          <Field
+            type="email"
+            name="email"
+            placeholder="Email"
+            className={s.input}
+            disabled={isLoading}
+          />
+          <div className={s.wrap}>
+            <Field
+              type="password"
+              name="password"
+              placeholder="Password"
+              className={s.input}
+              disabled={isLoading}
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className={s.iconBtn}
+              disabled={isLoading}
+              tabIndex={isLoading ? -1 : 0}>
+              <svg className={s.icon}>
+                <use href={`${sprite}#icon-eye`} />
+              </svg>
+            </button>
+          </div>
+
+          <button type="submit" className={s.button} disabled={isLoading}>
+            Log in
+          </button>
+        </Form>
+      </Formik>
+    </div>
+  );
 };
 
 export default LoginForm;
