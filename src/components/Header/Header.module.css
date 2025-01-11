@@ -28,6 +28,12 @@
   color: var(--main);
   font-weight: 400;
   line-height: 1.25;
+  transition: all 0.3s ease;
+}
+
+.link:hover,
+.link:focus {
+  color: var(--light);
 }
 
 .active {
@@ -60,6 +66,12 @@
   color: var(--main);
   font-weight: 700;
   line-height: 1.25;
+  transition: all 0.3s ease;
+}
+
+.text:hover,
+.text:focus {
+  color: var(--dark);
 }
 
 .register {
@@ -69,4 +81,10 @@
   padding: 14px 39px;
   background-color: var(--main);
   color: var(--white);
+  transition: all 0.3s ease;
+}
+
+.register:hover,
+.register:focus {
+  color: var(--light);
 }

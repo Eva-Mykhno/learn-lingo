@@ -4,13 +4,23 @@ import { fetchTeachers } from "./operations.js";
 const initialState = {
   items: [], // Список учителів
   isLoading: false, // Стан завантаження
-  error: null, // Помилка, якщо вона є
+  error: null,
+  filters: {
+    language: null,
+    level: null,
+    price: null,
+  },
 };
 
 const teachersSlice = createSlice({
   name: "teachers",
   initialState,
-  reducers: {}, // Якщо потрібно, можна додати інші редуктори
+  reducers: {
+    setFilter(state, action) {
+      const { filterName, value } = action.payload;
+      state.filters[filterName] = value; // Обновляем фильтр
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTeachers.pending, (state) => {
@@ -28,4 +38,5 @@ const teachersSlice = createSlice({
   },
 });
 
+export const { setFilter } = teachersSlice.actions;
 export const teachersReducer = teachersSlice.reducer;

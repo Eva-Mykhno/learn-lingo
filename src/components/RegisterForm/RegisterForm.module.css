@@ -31,10 +31,39 @@
   outline: none;
   border-radius: 12px;
   border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid var(--light);
+}
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  outline: none;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid var(--light);
 }
 
 .error {
   color: var(--dark);
+  position: absolute;
+  top: 108%;
+  left: 5%;
+  transform: translateX(-10%);
+  font-size: 12px;
+}
+
+.wrap {
+  position: relative;
 }
 
 .wrap {
@@ -75,4 +104,9 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 1.55;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--light);
 }

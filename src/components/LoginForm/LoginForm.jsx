@@ -70,7 +70,7 @@ const LoginForm = ({ closeModal }) => {
         initialValues={initialLoginValues}
         onSubmit={handleSubmit}>
         <Form className={s.form}>
-          <div>
+          <div className={s.wrap}>
             <Field
               type="email"
               name="email"

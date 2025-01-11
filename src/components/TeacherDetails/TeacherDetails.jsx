@@ -1,9 +1,22 @@
+import { useState } from "react";
 import LanguageLevels from "../LanguageLevels/LanguageLevels";
 import s from "./TeacherDetails.module.css";
+import Modal from "../Modal/Modal";
+import BookForm from "../BookForm/BookForm";
 
 const sprite = "../../../public/sprite.svg";
 
 const TeacherDetails = ({ teacher, selectedLevel, onLevelChange }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const getReviewerName = (reviewer_name) => {
     return reviewer_name.charAt(0).toUpperCase();
   };
@@ -40,9 +53,14 @@ const TeacherDetails = ({ teacher, selectedLevel, onLevelChange }) => {
         onLevelChange={onLevelChange}
       />
 
-      <button type="button" className={s.button}>
+      <button type="button" onClick={() => openModal()} className={s.button}>
         Book trial lesson
       </button>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {" "}
+        <BookForm teacher={teacher} closeModal={closeModal} />
+      </Modal>
     </section>
   );
 };

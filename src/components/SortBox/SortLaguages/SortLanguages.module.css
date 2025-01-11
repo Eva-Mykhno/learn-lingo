@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.option {
+  width: 220px;
+  padding: 16px 18px;
+  border: none;
+  outline: none;
+  background-color: var(--white);
+  border-radius: 14px;
+  color: var(--main);
+  font-family: 18px;
+  cursor: pointer;
+  appearance: none; /* Убираем стандартный стиль */
+  -webkit-appearance: none; /* Для Safari */
+  -moz-appearance: none;
+  background-image: url("../../../../public/sprite.svg");
+  background-repeat: no-repeat;
+  background-position: right 16px center; /* Позиционирование стрелки */
+  background-size: 16px 16px;
+}

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import clsx from "clsx";
 import { fetchTeachers } from "../../redux/teachers/operations";
 import {
-  selectTeachers,
+  selectFilteredTeachers,
   selectIsLoading,
   selectError,
 } from "../../redux/teachers/selectors";
@@ -20,10 +19,9 @@ const TeachersList = () => {
   const [expandedTeacherId, setExpandedTeacherId] = useState(null);
   const [selectedLevels, setSelectedLevels] = useState({});
 
-  const teachers = useSelector(selectTeachers);
+  const teachers = useSelector(selectFilteredTeachers);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
   useEffect(() => {
     dispatch(fetchTeachers());
   }, [dispatch]);

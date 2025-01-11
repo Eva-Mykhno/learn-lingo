@@ -76,7 +76,7 @@ const RegisterForm = ({ closeModal }) => {
         initialValues={initialRegisterValues}
         onSubmit={handleSubmit}>
         <Form className={s.form}>
-          <div>
+          <div className={s.wrap}>
             <Field
               type="text"
               name="name"
@@ -87,7 +87,7 @@ const RegisterForm = ({ closeModal }) => {
             <ErrorMessage name="name" component="span" className={s.error} />
           </div>
 
-          <div>
+          <div className={s.wrap}>
             <Field
               type="email"
               name="email"
