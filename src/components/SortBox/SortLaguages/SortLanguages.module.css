@@ -1,10 +1,15 @@
-.wrapper {
+.label {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.label {
+.wrapper {
+  position: relative;
+  display: flex;
+}
+
+.text {
   color: var(--accent);
   font-size: 14px;
 }
@@ -18,12 +23,23 @@
   border-radius: 14px;
   color: var(--main);
   font-family: 18px;
+  font-weight: 500;
   cursor: pointer;
-  appearance: none; /* Убираем стандартный стиль */
-  -webkit-appearance: none; /* Для Safari */
+  appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("../../../../public/sprite.svg");
-  background-repeat: no-repeat;
-  background-position: right 16px center; /* Позиционирование стрелки */
-  background-size: 16px 16px;
+}
+
+.icon {
+  content: "";
+  stroke: var(--main);
+  fill: transparent;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
 }

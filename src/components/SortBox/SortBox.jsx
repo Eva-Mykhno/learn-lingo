@@ -1,14 +1,15 @@
 import SortLanguages from "./SortLaguages/SortLanguages";
 import SortLevels from "./SortLevels/SortLevels";
-import SortPrice from "./SortPrice/SortPrise";
+import SortPrice from "./SortPrice/SortPrice";
+import s from "./SortBox.module.css";
 
 const SortBox = () => {
   return (
-    <div>
+    <section className={s.sort}>
       <SortLanguages />
       <SortLevels />
       <SortPrice />
-    </div>
+    </section>
   );
 };
 

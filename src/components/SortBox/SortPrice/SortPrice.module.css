@@ -1,0 +1,45 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+}
+
+.text {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.option {
+  width: 150px;
+  padding: 16px 18px;
+  border: none;
+  outline: none;
+  background-color: var(--white);
+  border-radius: 14px;
+  color: var(--main);
+  font-family: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.icon {
+  content: "";
+  stroke: var(--main);
+  fill: transparent;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}

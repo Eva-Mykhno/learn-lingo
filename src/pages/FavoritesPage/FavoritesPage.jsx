@@ -1,7 +1,13 @@
-import React from "react";
+import clsx from "clsx";
+import FavoritesList from "../../components/FavoritesList/FavoritesList";
+import s from "./FavoritesPage.module.css";
 
-const Favorites = () => {
-  return <div>Favorites</div>;
+const FavoritesPage = () => {
+  return (
+    <main className={clsx(s.page, "container")}>
+      <FavoritesList />
+    </main>
+  );
 };
 
-export default Favorites;
+export default FavoritesPage;

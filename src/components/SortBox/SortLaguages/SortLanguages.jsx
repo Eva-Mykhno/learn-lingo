@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
+import { Formik, Form, Field } from "formik";
 import { setFilter } from "../../../redux/teachers/slice";
 import s from "./SortLanguages.module.css";
+
+const sprite = "../../../../public/sprite.svg";
 
 const SortLanguages = () => {
   const dispatch = useDispatch();
 
-  const handleLanguageChange = (event) => {
-    dispatch(setFilter({ filterName: "language", value: event.target.value }));
-  };
   const languages = [
     "English",
     "Spanish",
@@ -18,18 +18,38 @@ const SortLanguages = () => {
     "Korean",
     "Vietnamese",
   ];
+
+  const initialLanguageValues = {
+    language: "",
+  };
+
+  const handleSubmit = (values) => {
+    dispatch(setFilter({ filterName: "language", value: values.language }));
+  };
+
   return (
-    <label className={s.wrapper}>
-      <span className={s.label}>Languages</span>
-      <select onChange={handleLanguageChange} className={s.option}>
-        {/* <option value="">All Languages</option> */}
-        {languages.map((language) => (
-          <option key={language} value={language}>
-            {language}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Formik initialValues={initialLanguageValues} onSubmit={handleSubmit}>
+      {({ handleSubmit }) => (
+        <Form onChange={handleSubmit} className={s.wrapper}>
+          <label className={s.label}>
+            <span className={s.text}>Languages</span>
+            <div className={s.wrapper}>
+              <Field as="select" name="language" className={s.option}>
+                <option value="">Select language</option>
+                {languages.map((language) => (
+                  <option key={language} value={language}>
+                    {language}
+                  </option>
+                ))}
+              </Field>
+              <svg height="20" width="20" className={s.icon}>
+                <use href={`${sprite}#icon-chevron-down`} />
+              </svg>
+            </div>
+          </label>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

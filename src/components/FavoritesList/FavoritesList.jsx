@@ -1,37 +1,30 @@
-import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTeachers } from "../../redux/teachers/operations";
+import { toggleFavorite } from "../../redux/teachers/slice";
 import {
-  selectFilteredTeachers,
-  selectIsLoading,
   selectError,
   selectFavorites,
+  selectFavoriteTeachers,
+  selectIsLoading,
 } from "../../redux/teachers/selectors";
-import { selectUser } from "../../redux/auth/selectors";
-import iziToast from "izitoast"; // Подключаем iziToast
+import s from "./FavoritesList.module.css";
+import { useState } from "react";
 import Loader from "../Loader/Loader";
-import s from "./TeachersList.module.css";
+import clsx from "clsx";
 import TeacherDetails from "../TeacherDetails/TeacherDetails";
 import LanguageLevels from "../LanguageLevels/LanguageLevels";
-import { toggleFavorite } from "../../redux/teachers/slice"; //-new
-import clsx from "clsx";
 
 const sprite = "../../../public/sprite.svg";
 
-const TeachersList = () => {
+const FavoritesList = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(4);
   const [expandedTeacherId, setExpandedTeacherId] = useState(null);
   const [selectedLevels, setSelectedLevels] = useState({});
 
-  const teachers = useSelector(selectFilteredTeachers);
+  const favoriteTeachers = useSelector(selectFavoriteTeachers);
   const favorites = useSelector(selectFavorites);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const user = useSelector(selectUser);
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch]);
 
   const handleLevelChange = (teacherId, level) => {
     setSelectedLevels((prev) => ({
@@ -48,19 +41,15 @@ const TeachersList = () => {
     setVisible((prev) => prev + 4);
   };
 
-  const handleFavoriteToggle = (teacher) => {
-    if (!user) {
-      iziToast.error({
-        title: "Error",
-        message: "This feature is available only for authorized users.",
-      });
-      return;
-    }
+  const hasMoreTeachers = favoriteTeachers.length > visible;
 
-    dispatch(toggleFavorite(teacher));
+  const handleFavoriteToggle = (teacherId) => {
+    dispatch(toggleFavorite(teacherId));
   };
 
-  const hasMoreTeachers = teachers.length > visible;
+  if (favoriteTeachers.length === 0) {
+    return <p className={s.empty}>No favorite teachers yet.</p>;
+  }
 
   if (isLoading) {
     return <Loader />;
@@ -70,20 +59,10 @@ const TeachersList = () => {
     return <p>Error: {error}</p>;
   }
 
-  if (teachers.length === 0) {
-    return (
-      <section>
-        <p>
-          Sorry, nothing found for your request. Please change sorting options.
-        </p>
-      </section>
-    );
-  }
-
   return (
     <section>
       <ul className={s.list}>
-        {teachers.slice(0, visible).map((teacher) => {
+        {favoriteTeachers.slice(0, visible).map((teacher) => {
           const isFavorite = favorites.includes(teacher.id);
           const selectedLevel = selectedLevels[teacher.id] || teacher.levels[0];
 
@@ -188,4 +167,4 @@ const TeachersList = () => {
   );
 };
 
-export default TeachersList;
+export default FavoritesList;

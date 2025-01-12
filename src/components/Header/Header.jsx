@@ -53,9 +53,11 @@ const Header = () => {
         <NavLink to="/teachers" className={buildLinkClassName}>
           Teachers
         </NavLink>
-        <NavLink to="/favorites" className={buildLinkClassName}>
-          Favorites
-        </NavLink>
+        {user && (
+          <NavLink to="/favorites" className={buildLinkClassName}>
+            Favorites
+          </NavLink>
+        )}
       </nav>
 
       <div className={s.wrapLogin}>

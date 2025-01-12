@@ -1,0 +1,28 @@
+.page {
+  padding-top: 96px;
+  padding-bottom: 96px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.text {
+  color: var(--main);
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.backText {
+  display: block;
+  width: 260px;
+  height: 60px;
+  padding: 10px 0;
+  background-color: var(--main);
+  border-radius: 30px;
+  color: var(--dark);
+  text-align: center;
+  font-size: 36px;
+}
