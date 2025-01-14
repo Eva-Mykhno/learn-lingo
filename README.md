@@ -1,6 +1,6 @@
-![Screenshot of my projects' homepage](/public/Homepage.jpg)
-
 # Learn Lingo
+
+![Screenshot of my projects' homepage](/public/Homepage.jpg)
 
 Hello, my name's Eva Mykhno. I'm a frontend developer, and I'm excited to introduce my project!
 
@@ -8,7 +8,7 @@ Hello, my name's Eva Mykhno. I'm a frontend developer, and I'm excited to introd
 
 Learn Lingo is a web application that offers users to learn foreign languages. The user can choose not only the language, but also the teacher, reading reviews from other users and ordering a trial lesson. He can also sort teachers by language level and price. The user can add the teachers he likes to "favorites".
 
-# Website: [Learn Lingo](https://learn-lingo-two.vercel.app/)
+### Website: [Learn Lingo](https://learn-lingo-two.vercel.app/)
 
 ## Application pages:
 
@@ -28,6 +28,7 @@ The page is accessible only to authorized users. The list of favorite teachers i
 
 Frontend:  
 React, redux/toolkit, react-router-dom, Formik, yup, HTML, CSS, JavaScript, CSS Modules for styling,
+
 Backend:  
 Firebase Authentication.  
 Firebase Realtime Database.
