@@ -3,9 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./RegisterForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../redux/auth/operations"; // импортируем операцию для регистрации
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import { registerUser } from "../../redux/auth/operations";
 
 const sprite = "../../../public/sprite.svg";
 
@@ -44,13 +42,6 @@ const RegisterForm = ({ closeModal }) => {
     try {
       await dispatch(registerUser(values));
 
-      iziToast.show({
-        title: "Success!",
-        message: "You have successfully registered!",
-        position: "center",
-        color: "green",
-        timeout: 6000,
-      });
       actions.resetForm();
       closeModal();
     } catch (error) {

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { setFilter } from "../../../redux/teachers/slice";
 import s from "./SortLanguages.module.css";
 
-const sprite = "../../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const SortLanguages = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const SortLanguages = () => {
   };
 
   const handleSubmit = (values) => {
-    dispatch(setFilter({ filterName: "language", value: values.language }));
+    dispatch(setFilter({ name: "language", value: values.language }));
   };
 
   return (

@@ -3,11 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./LoginForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/auth/operations"; // импортируем операцию для логина
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import { loginUser } from "../../redux/auth/operations";
 
-const sprite = "../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -38,13 +36,6 @@ const LoginForm = ({ closeModal }) => {
     setIsLoading(true);
     try {
       await dispatch(loginUser(values));
-      iziToast.show({
-        title: "Success!",
-        message: "You have successfully logged in!",
-        position: "center",
-        color: "green",
-        timeout: 6000,
-      });
       actions.resetForm();
       closeModal();
     } catch (error) {

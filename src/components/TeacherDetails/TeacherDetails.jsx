@@ -4,7 +4,7 @@ import s from "./TeacherDetails.module.css";
 import Modal from "../Modal/Modal";
 import BookForm from "../BookForm/BookForm";
 
-const sprite = "../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const TeacherDetails = ({ teacher, selectedLevel, onLevelChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

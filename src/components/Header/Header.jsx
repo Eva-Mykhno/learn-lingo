@@ -3,20 +3,26 @@ import { useState } from "react";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/auth/operations";
-import { selectUser } from "../../redux/auth/selectors";
+import {
+  selectIsAuthenticated,
+  selectIsRefreshing,
+  selectUser,
+} from "../../redux/auth/selectors";
 import Modal from "../Modal/Modal";
 import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import s from "./Header.module.css";
+import Loader from "../Loader/Loader";
 
-const sprite = "../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
 
-  const user = useSelector(selectUser); // Получаем информацию о пользователе из Redux
-  // console.log("Current user in Header:", user);
+  const user = useSelector(selectUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   const dispatch = useDispatch();
 
@@ -34,8 +40,8 @@ const Header = () => {
     return clsx(s.link, isActive && s.active);
   };
 
-  const handleLogout = () => {
-    dispatch(logoutUser()); // Вызов операции логаута
+  const handleLogout = async () => {
+    dispatch(logoutUser());
   };
 
   return (
@@ -61,7 +67,18 @@ const Header = () => {
       </nav>
 
       <div className={s.wrapLogin}>
-        {!user ? (
+        {isAuthenticated ? (
+          <>
+            <button type="button" className={s.login} onClick={handleLogout}>
+              <svg className={s.icon} height="20" width="20">
+                <use href={`${sprite}#icon-log-out`} />
+              </svg>
+              <span className={s.text}>Logout</span>
+            </button>
+          </>
+        ) : isRefreshing ? (
+          <Loader />
+        ) : (
           <>
             <button
               type="button"
@@ -79,15 +96,6 @@ const Header = () => {
               Registration
             </button>
           </>
-        ) : (
-          <div className={s.wrapLogin}>
-            <button type="button" className={s.login} onClick={handleLogout}>
-              <svg className={s.icon} height="20" width="20">
-                <use href={`${sprite}#icon-log-out`} />
-              </svg>
-              <span className={s.text}>Logout</span>
-            </button>
-          </div>
         )}
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {modalType === "login" && <LoginForm closeModal={closeModal} />}

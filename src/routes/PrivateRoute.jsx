@@ -3,12 +3,12 @@ import { selectUser } from "../redux/auth/selectors";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-  const user = useSelector(selectUser); // Получаем информацию о пользователе из Redux
+  const user = useSelector(selectUser);
   if (!user) {
     return <Navigate to="/auth/login" />;
   }
 
-  return children; // Если пользователь авторизован, рендерим переданный компонент
+  return children;
 };
 
 export default PrivateRoute;

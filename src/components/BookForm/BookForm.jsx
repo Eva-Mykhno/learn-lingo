@@ -18,7 +18,12 @@ const bookFormSchema = Yup.object().shape({
       'Email must have a one "@" and a "."'
     )
     .required("Email is required"),
-  phone: Yup.string().required("Phone number is required"),
+  phone: Yup.string()
+    .matches(
+      /^[+]?[0-9]{1,3}[ -]?[0-9]{1,15}$/,
+      "Phone number must be a valid phone number"
+    )
+    .required("Phone number is required"),
 });
 
 const BookForm = ({ teacher, closeModal }) => {
@@ -35,13 +40,12 @@ const BookForm = ({ teacher, closeModal }) => {
       name: values.name,
       email: values.email,
       phone: values.phone,
-      teacher: teacher.name, // Викладач, обраний для уроку
-      timestamp: Date.now(), // Час створення заявки
+      teacher: teacher.name, 
+      timestamp: Date.now(),
     };
 
     try {
-      // Запис даних у Firebase Realtime Database
-      const db = getDatabase();
+          const db = getDatabase();
       const trialLessonsRef = ref(db, "trial_lessons");
       await push(trialLessonsRef, message);
 

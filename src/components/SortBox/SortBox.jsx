@@ -1,4 +1,4 @@
-import SortLanguages from "./SortLaguages/SortLanguages";
+import SortLanguages from "./SortLanguages/SortLanguages";
 import SortLevels from "./SortLevels/SortLevels";
 import SortPrice from "./SortPrice/SortPrice";
 import s from "./SortBox.module.css";

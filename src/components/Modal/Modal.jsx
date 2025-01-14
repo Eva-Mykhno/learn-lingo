@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import s from "./Modal.module.css";
 
-const sprite = "../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const customStyles = {
   content: {

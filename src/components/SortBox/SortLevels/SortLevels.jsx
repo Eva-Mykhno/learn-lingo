@@ -3,14 +3,11 @@ import { Formik, Form, Field } from "formik";
 import { setFilter } from "../../../redux/teachers/slice";
 import s from "./SortLevels.module.css";
 
-const sprite = "../../../../public/sprite.svg";
+const sprite = "/sprite.svg";
 
 const SortLevels = () => {
   const dispatch = useDispatch();
 
-  //   const handleLevelChange = (event) => {
-  //     dispatch(setFilter({ filterName: "level", value: event.target.value }));
-  //   };
   const levels = [
     "A1 Beginner",
     "A2 Elementary",
@@ -25,23 +22,8 @@ const SortLevels = () => {
   };
 
   const handleSubmit = (values) => {
-    dispatch(setFilter({ filterName: "level", value: values.level }));
+    dispatch(setFilter({ name: "level", value: values.level }));
   };
-
-  //   return (
-  //     <div className={s.wrapper}>
-  //       <label className={s.label}>
-  //         <select onChange={handleLevelChange}>
-  //           {levels.map((level) => (
-  //             <option key={level} value={level}>
-  //               {level}
-  //             </option>
-  //           ))}
-  //         </select>
-  //       </label>
-  //     </div>
-  //   );
-  // };
 
   return (
     <Formik initialValues={initialLevelValues} onSubmit={handleSubmit}>

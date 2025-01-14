@@ -1,75 +1,100 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-import { auth, database } from "../../config/firebaseConfig";
-import { ref, set } from "firebase/database";
+import { auth } from "../../config/firebaseConfig.js";
+import { getDatabase, ref, set } from "firebase/database";
+import { resetFavorites } from "../favorites/slice.js";
 
 export const registerUser = createAsyncThunk(
-  "auth/registerUser",
-  async (userData, thunkAPI) => {
+  "auth/register",
+  async ({ email, password, name }, thunkAPI) => {
     try {
-      // Регистрация нового пользователя
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        userData.email,
-        userData.password
+        email,
+        password
       );
       const user = userCredential.user;
+      await updateProfile(user, { displayName: name });
 
-      // Сохранение данных пользователя в Firebase Realtime Database
-      const userRef = ref(database, "users/" + user.uid);
-      await set(userRef, {
+      const db = getDatabase();
+      await set(ref(db, `users/${user.uid}`), {
+        email: user.email,
+        displayName: name,
+        favorites: [],
+      });
+
+      return {
+        email: user.email,
+        displayName: name,
         uid: user.uid,
-        name: userData.name,
-        email: userData.email,
-      });
-
-      // Автоматический логин после регистрации
-      await signInWithEmailAndPassword(auth, userData.email, userData.password);
-
-      // Возвращаем данные пользователя
-      return { uid: user.uid, name: userData.name, email: userData.email };
+      };
     } catch (error) {
-      console.error("Firebase Error:", error);
-
-      // Проверка на ошибку
-      return thunkAPI.rejectWithValue({
-        code: error.code,
-        message: error.message,
-      });
+      return thunkAPI.rejectWithValue(error.message || "Failed to register");
     }
   }
 );
 
-// Логин пользователя
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async (credentials, thunkAPI) => {
+  "auth/logIn",
+  async ({ email, password }, thunkAPI) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        credentials.email,
-        credentials.password
+        email,
+        password
       );
       const user = userCredential.user;
-      return { uid: user.uid, email: user.email };
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return {
+        email: user.email,
+        displayName: user.displayName,
+        uid: user.uid,
+      };
+    } catch {
+      return thunkAPI.rejectWithValue("Invalid email or password");
     }
   }
 );
 
-// Логаут пользователя
 export const logoutUser = createAsyncThunk(
-  "auth/logoutUser",
+  "auth/logOut",
   async (_, thunkAPI) => {
     try {
       await signOut(auth);
+      thunkAPI.dispatch(resetFavorites());
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message || "Failed to log out");
+    }
+  }
+);
+
+export const refreshUser = createAsyncThunk(
+  "auth/refreshUser",
+  async (_, thunkAPI) => {
+    try {
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            resolve({
+              email: user.email,
+              displayName: user.displayName,
+              uid: user.uid,
+              token: await user.getIdToken(),
+            });
+          } else {
+            reject(thunkAPI.rejectWithValue("No user found"));
+          }
+        });
+      });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.message || "Failed to refresh user"
+      );
     }
   }
 );

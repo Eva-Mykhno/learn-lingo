@@ -1,22 +1,21 @@
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { database } from "../../config/firebaseConfig.js";
-import { ref, get } from "firebase/database";
+import { setTeachers, setLoading, setError } from "./slice.js";
 
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (_, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
     try {
-      const teachersRef = ref(database, "teachers"); // Шлях до колекції 'teachers'
-      const snapshot = await get(teachersRef);
-      if (snapshot.exists()) {
-        const teachers = snapshot.val();
-        // Перетворюємо об'єкт у масив
-        return Object.entries(teachers).map(([id, data]) => ({ id, ...data }));
-      } else {
-        return [];
-      }
+      const response = await fetch(
+        "https://learn-lingo-25-default-rtdb.europe-west1.firebasedatabase.app/teachers.json"
+      );
+      const data = await response.json();
+      thunkAPI.dispatch(setTeachers(data));
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      thunkAPI.dispatch(setError(error.message));
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
     }
   }
 );
