@@ -1,8 +1,8 @@
 import { useState } from "react";
 import LanguageLevels from "../LanguageLevels/LanguageLevels";
-import s from "./TeacherDetails.module.css";
 import Modal from "../Modal/Modal";
 import BookForm from "../BookForm/BookForm";
+import s from "./TeacherDetails.module.css";
 
 const sprite = "/sprite.svg";
 

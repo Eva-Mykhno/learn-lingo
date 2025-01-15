@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTeachers } from "../../redux/teachers/operations";
-import s from "./TeachersList.module.css";
 import TeacherCard from "../TeacherCard/TeacherCard.jsx";
+import { fetchTeachers } from "../../redux/teachers/operations";
 import { selectFilteredTeachers } from "../../redux/teachers/selectors.js";
+import s from "./TeachersList.module.css";
 
 const TeachersList = () => {
   const dispatch = useDispatch();

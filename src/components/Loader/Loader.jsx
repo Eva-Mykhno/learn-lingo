@@ -3,7 +3,7 @@ import s from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <div className={s.Loader}>
+    <div className={s.loader}>
       <CircleLoader color="#F0AA8D" size={150} speedMultiplier={1} />;
     </div>
   );

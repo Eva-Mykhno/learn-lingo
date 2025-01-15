@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TeacherCard from "../TeacherCard/TeacherCard";
 import { selectFavorites } from "../../redux/favorites/selectors.js";
-import s from "./FavoritesList.module.css";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { fetchFavorites } from "../../redux/favorites/operations.js";
+import s from "./FavoritesList.module.css";
 
 const FavoritesList = () => {
   const dispatch = useDispatch();

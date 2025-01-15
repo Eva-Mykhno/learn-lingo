@@ -1,8 +1,8 @@
 import { Formik, Form, Field } from "formik";
 import { setFilter } from "../../../redux/teachers/slice";
-import s from "./SortPrice.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentPrice } from "../../../redux/teachers/selectors";
+import s from "./SortPrice.module.css";
 
 const sprite = "/sprite.svg";
 

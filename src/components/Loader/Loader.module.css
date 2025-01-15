@@ -1,8 +1,8 @@
 .loader {
   min-height: 100vh;
-  min-width: 100vh;
-  background-color: var(--gray-light);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Центрирует по горизонтали */
+  align-items: center; /* Центрирует по вертикали */
+  background-color: var(--gray-light);
+  margin: 0 auto;
 }

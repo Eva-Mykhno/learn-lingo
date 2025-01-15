@@ -1,5 +1,5 @@
-import Home from "../../components/Home/Home";
 import clsx from "clsx";
+import Home from "../../components/Home/Home";
 import s from "./HomePage.module.css";
 
 const HomePage = () => {

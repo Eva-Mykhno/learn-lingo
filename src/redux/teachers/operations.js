@@ -1,4 +1,3 @@
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setTeachers, setLoading, setError } from "./slice.js";
 

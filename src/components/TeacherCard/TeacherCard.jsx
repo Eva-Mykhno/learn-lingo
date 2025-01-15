@@ -1,15 +1,16 @@
-import s from "./TeacherCard.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import clsx from "clsx";
+import LanguageLevels from "../LanguageLevels/LanguageLevels.jsx";
+import TeacherDetails from "../TeacherDetails/TeacherDetails.jsx";
 import { saveFavorites } from "../../redux/favorites/operations.js";
 import { addFavorites, deleteFavorites } from "../../redux/favorites/slice.js";
 import { selectIsAuthenticated, selectUser } from "../../redux/auth/selectors";
 import { selectFavorites } from "../../redux/favorites/selectors";
-import LanguageLevels from "../LanguageLevels/LanguageLevels.jsx";
-import clsx from "clsx";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import TeacherDetails from "../TeacherDetails/TeacherDetails.jsx";
+import s from "./TeacherCard.module.css";
+
 
 const sprite = "/sprite.svg";
 

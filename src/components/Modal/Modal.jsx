@@ -1,4 +1,5 @@
 import ReactModal from "react-modal";
+import { useEffect } from "react";
 import s from "./Modal.module.css";
 
 const sprite = "/sprite.svg";
@@ -12,9 +13,11 @@ const customStyles = {
     bottom: "auto",
     padding: "64px",
     transform: "translate(-50%, -50%)",
-    overflow: "hidden",
+    overflow: "auto",
     borderRadius: "30px",
     backgroundColor: "var(--white)",
+    maxHeight: "90vh", // Ограничиваем высоту окна
+    // Ограничиваем ширину окна
   },
   overlay: {
     backgroundColor: "var(--accent)",
@@ -25,6 +28,16 @@ const customStyles = {
 ReactModal.setAppElement("#root");
 
 const Modal = ({ isOpen, onClose, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
   return (
     <ReactModal
       isOpen={isOpen}

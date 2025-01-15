@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import s from "./RegisterForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/auth/operations";
+import s from "./RegisterForm.module.css";
 
 const sprite = "../../../public/sprite.svg";
 

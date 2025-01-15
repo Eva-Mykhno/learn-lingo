@@ -85,11 +85,17 @@
   height: 26px;
   fill: transparent;
   stroke: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .heart use {
   width: 26px;
   height: 26px;
+}
+
+.heart:hover {
+  stroke: (--dark);
 }
 
 .isFavorite {

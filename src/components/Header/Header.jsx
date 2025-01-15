@@ -2,17 +2,18 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "../Loader/Loader";
+import Modal from "../Modal/Modal";
+import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
 import { logoutUser } from "../../redux/auth/operations";
 import {
   selectIsAuthenticated,
   selectIsRefreshing,
   selectUser,
 } from "../../redux/auth/selectors";
-import Modal from "../Modal/Modal";
-import LoginForm from "../LoginForm/LoginForm";
-import RegisterForm from "../RegisterForm/RegisterForm";
 import s from "./Header.module.css";
-import Loader from "../Loader/Loader";
+
 
 const sprite = "/sprite.svg";
 
