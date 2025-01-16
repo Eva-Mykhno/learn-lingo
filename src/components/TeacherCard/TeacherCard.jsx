@@ -11,23 +11,20 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import s from "./TeacherCard.module.css";
 
-
 const sprite = "/sprite.svg";
 
-const TeacherCard = ({ teacher }) => {
+const TeacherCard = ({
+  teacher,
+  selectedLevel,
+
+  isFilterApplied,
+}) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const favorites = useSelector(selectFavorites);
   const [expandedTeacherId, setExpandedTeacherId] = useState(null);
-  const [selectedLevels, setSelectedLevels] = useState({});
-  const handleLevelChange = (teacherId, level) => {
-    setSelectedLevels((prev) => ({
-      ...prev,
-      [teacherId]: level,
-    }));
-  };
-
   const user = useSelector(selectUser);
+
   const isFavorite = favorites.some(
     (fav) => fav.name === teacher.name && fav.surname === teacher.surname
   );
@@ -61,8 +58,6 @@ const TeacherCard = ({ teacher }) => {
       dispatch(saveFavorites(user.uid, [...favorites, teacher]));
     }
   };
-
-  const selectedLevel = selectedLevels[teacher.id] || teacher.levels[0];
 
   return (
     <div className={s.teacher}>
@@ -128,19 +123,15 @@ const TeacherCard = ({ teacher }) => {
         )}
 
         {expandedTeacherId === teacher.id && (
-          <TeacherDetails
-            teacher={teacher}
-            selectedLevel={selectedLevel}
-            onLevelChange={handleLevelChange}
-          />
+          <TeacherDetails teacher={teacher} selectedLevel={selectedLevel} />
         )}
 
         {expandedTeacherId !== teacher.id && (
           <LanguageLevels
             teacherId={teacher.id}
             levels={teacher.levels}
-            selectedLevel={selectedLevel}
-            onLevelChange={handleLevelChange}
+            selectedLevel={isFilterApplied ? selectedLevel : null}
+            disabled={isFilterApplied}
           />
         )}
       </div>

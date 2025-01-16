@@ -2,18 +2,42 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TeacherCard from "../TeacherCard/TeacherCard.jsx";
 import { fetchTeachers } from "../../redux/teachers/operations";
-import { selectFilteredTeachers } from "../../redux/teachers/selectors.js";
+import {
+  selectFilteredTeachers,
+  selectLevel,
+} from "../../redux/teachers/selectors.js";
 import s from "./TeachersList.module.css";
 
 const TeachersList = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(4);
-
+  const selectedLevel = useSelector(selectLevel);
+  const [selectedLevels, setSelectedLevels] = useState({});
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
   const teachers = useSelector(selectFilteredTeachers);
 
   useEffect(() => {
     dispatch(fetchTeachers());
   }, [dispatch]);
+
+  useEffect(() => {
+    setSelectedLevels(() => {
+      const newLevels = {};
+      teachers.forEach((teacher) => {
+        newLevels[teacher.id] = selectedLevel || teacher.levels[0];
+      });
+      return newLevels;
+    });
+    setIsFilterApplied(!!selectedLevel);
+  }, [selectedLevel, teachers]);
+
+  const handleLevelChange = (teacherId, level) => {
+    if (isFilterApplied) return;
+    setSelectedLevels((prev) => ({
+      ...prev,
+      [teacherId]: level,
+    }));
+  };
 
   const handleLoadMore = () => {
     setVisible((prev) => prev + 4);
@@ -27,7 +51,13 @@ const TeachersList = () => {
         teachers
           .slice(0, visible)
           .map((teacher, index) => (
-            <TeacherCard key={index} teacher={teacher} />
+            <TeacherCard
+              key={index}
+              teacher={teacher}
+              selectedLevel={selectedLevels[teacher.id] || teacher.levels[0]}
+              onLevelChange={handleLevelChange}
+              isFilterApplied={isFilterApplied}
+            />
           ))
       ) : (
         <section>

@@ -20,24 +20,9 @@
   transition: all 0.3s ease;
 }
 
-.selected:hover,
-.selected:focus {
-  background-color: var(--light);
-}
-
 .unselected {
   border: 1px solid var(--border);
   transition: all 0.3s ease;
-}
-
-.unselected:hover,
-.unselected:focus {
-  border: none;
-  background-color: var(--light);
-}
-
-.radioLabel {
-  cursor: pointer;
 }
 
 .radioHidden {

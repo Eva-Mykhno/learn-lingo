@@ -1,12 +1,7 @@
 import clsx from "clsx";
 import s from "./LanguageLevels.module.css";
 
-const LanguageLevels = ({
-  teacherId,
-  levels,
-  selectedLevel,
-  onLevelChange,
-}) => {
+const LanguageLevels = ({ teacherId, levels, selectedLevel }) => {
   return (
     <ul className={s.levelList}>
       {levels.map((level, index) => (
@@ -15,15 +10,15 @@ const LanguageLevels = ({
           className={clsx(
             s.levelItem,
             selectedLevel === level ? s.selected : s.unselected
-          )}
-          onClick={() => onLevelChange(teacherId, level)}>
+          )}>
           <input
             type="radio"
             name={`level-${teacherId}`}
             value={level}
             checked={selectedLevel === level}
-            onChange={() => onLevelChange(teacherId, level)}
+            defaultChecked={false}
             className={s.radioHidden}
+            disabled
           />
           <label className={s.radioLabel}>{level}</label>
         </li>

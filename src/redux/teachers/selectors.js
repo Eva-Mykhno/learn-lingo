@@ -4,6 +4,7 @@ export const selectTeachers = (state) => state.teachers.teachers;
 export const selectIsLoading = (state) => state.teachers.isLoading;
 export const selectError = (state) => state.teachers.error;
 export const selectFilters = (state) => state.teachers.filters;
+export const selectLevel = (state) => state.teachers.filters.level;
 export const selectCurrentPrice = (state) =>
   state.teachers.filters.price_per_hour;
 
