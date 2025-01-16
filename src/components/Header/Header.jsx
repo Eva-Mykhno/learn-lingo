@@ -14,13 +14,11 @@ import {
 } from "../../redux/auth/selectors";
 import s from "./Header.module.css";
 
-
 const sprite = "/sprite.svg";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
-
   const user = useSelector(selectUser);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -47,12 +45,13 @@ const Header = () => {
 
   return (
     <header className={clsx(s.header, "container")}>
-      <div className={s.logo}>
+      <NavLink to="/" className={s.logo}>
         <svg height="28" width="28">
           <use href={`${sprite}#icon-ukraine`} />
         </svg>
         <span className={s.textLogo}>LearnLingo</span>
-      </div>
+      </NavLink>
+
       <nav className={s.nav}>
         <NavLink to="/" className={buildLinkClassName}>
           Home
